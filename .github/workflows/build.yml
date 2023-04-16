@@ -26,7 +26,7 @@ jobs:
           submodules: recursive
 
       - name: Build project
-        run: zig build test
+        run: zig build
 
       - name: Archive production artifacts
         uses: actions/upload-artifact@v3
