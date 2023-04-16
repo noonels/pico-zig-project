@@ -1,4 +1,5 @@
 const std = @import("std");
+//const uf2 = @import("main.zig");
 const rp2040 = @import("deps/raspberrypi-rp2040/build.zig");
 
 // the hardware support package should have microzig as a dependency
@@ -7,7 +8,7 @@ const microzig = @import("deps/raspberrypi-rp2040/deps/microzig/build.zig");
 pub fn build(b: *std.build.Builder) !void {
     const optimize = b.standardOptimizeOption(.{});
     var exe = microzig.addEmbeddedExecutable(b, .{
-        .name = "firmware",
+        .name = "firmware.uf2",
         .source_file = .{
             .path = "src/main.zig",
         },
