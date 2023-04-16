@@ -14,7 +14,6 @@ pub fn build(b: *std.build.Builder) !void {
         },
         .optimize = optimize,
     });
-    exe.installArtifact(b);
 
     const uf2_step = uf2.Uf2Step.create(exe.inner, .{ .family_id = .RP2040 });
     uf2_step.install();
