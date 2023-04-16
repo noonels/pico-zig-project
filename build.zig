@@ -7,7 +7,7 @@ const microzig = @import("deps/raspberrypi-rp2040/deps/microzig/build.zig");
 pub fn build(b: *std.build.Builder) !void {
     const optimize = b.standardOptimizeOption(.{});
     var exe = microzig.addEmbeddedExecutable(b, .{
-        .name = "my-executable",
+        .name = "firmware",
         .source_file = .{
             .path = "src/main.zig",
         },
@@ -19,5 +19,5 @@ pub fn build(b: *std.build.Builder) !void {
         },
         .optimize = optimize,
     });
-    exe.install();
+    exe.installArtifact(b);
 }
