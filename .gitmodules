@@ -1,3 +1,6 @@
 [submodule "src/deps/raspberrypi-rp2040"]
 	path = src/deps/raspberrypi-rp2040
 	url = https://github.com/ZigEmbeddedGroup/raspberrypi-rp2040
+[submodule "deps/raspberrypi-rp2040"]
+	path = deps/raspberrypi-rp2040
+	url = https://github.com/ZigEmbeddedGroup/raspberrypi-rp2040
