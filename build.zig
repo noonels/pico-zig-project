@@ -7,16 +7,10 @@ const microzig = @import("deps/raspberrypi-rp2040/deps/microzig/build.zig");
 
 pub fn build(b: *std.build.Builder) !void {
     const optimize = b.standardOptimizeOption(.{});
-    var exe = microzig.addEmbeddedExecutable(b, .{
+    var exe = rp2040.addPiPicoExecutable(b, .{
         .name = "firmware",
         .source_file = .{
             .path = "src/main.zig",
-        },
-        .backing = .{
-            .board = rp2040.boards.raspberry_pi_pico,
-
-            // instead of a board, you can use the raw chip as well
-            // .chip = atmega.chips.atmega328p,
         },
         .optimize = optimize,
     });
