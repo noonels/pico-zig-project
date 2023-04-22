@@ -45,7 +45,7 @@ const pin_config = rp2040.pins.GlobalConfiguration{
         .name = "retract",
         .direction = .out,
     },
-    .GOIO11 = .{
+    .GPIO11 = .{
         .name = "auto_led",
         .direction = .out,
     },
