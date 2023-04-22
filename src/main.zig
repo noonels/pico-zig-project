@@ -50,11 +50,11 @@ const pin_config = rp2040.pins.GlobalConfiguration{
         .direction = .out,
     },
     // Control configuration
-    .GPIO12 = .{
+    .GPIO26 = .{
         .name = "left_x_axis",
         .direction = .in,
     },
-    .GPIO13 = .{
+    .GPIO27 = .{
         .name = "left_y_axis",
         .direction = .in,
     },
