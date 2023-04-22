@@ -6,35 +6,35 @@ const pin_config = rp2040.pins.GlobalConfiguration{
     // Motor configuration
     .GPIO1 = .{
         .name = "motor1",
-        .direction = .out,
+        .function = .PWM0_B,
     },
     .GPIO2 = .{
         .name = "motor1_rev",
-        .direction = .out,
+        .function = .PWM1_A,
     },
     .GPIO3 = .{
         .name = "motor2",
-        .direction = .out,
+        .function = .PWM1_B,
     },
     .GPIO4 = .{
         .name = "motor2_rev",
-        .direction = .out,
+        .function = .PWM2_A,
     },
     .GPIO5 = .{
         .name = "motor3",
-        .direction = .out,
+        .function = .PWM2_B,
     },
     .GPIO6 = .{
         .name = "motor3_rev",
-        .direction = .out,
+        .function = .PWM3_A,
     },
     .GPIO7 = .{
         .name = "motor4",
-        .direction = .out,
+        .function = .PWM3_B,
     },
     .GPIO8 = .{
         .name = "motor4_rev",
-        .direction = .out,
+        .function = .PWM4_A,
     },
     // Weapons configuration
     .GPIO9 = .{
@@ -76,6 +76,10 @@ const pin_config = rp2040.pins.GlobalConfiguration{
     },
 };
 
+fn incWrap(val: u16, max: u16) u16 {
+    return val + 1 % max;
+}
+
 /// Firmware for Isomatter::Labs battlebot
 /// submitted to the 2024 Battlebots competition
 /// in the ant-weight division.
@@ -95,32 +99,31 @@ pub fn main() !void {
     //   serial (main board -> peripheral boards). This is to provide redundancy,
     //   and to prevent the possibility of having some peripheral function block the
     //   primary control loop.
-    while (true) {
-        for (0..100) |lvl| {
-            const forward_motion = pins.left_x_axis.read();
-            _ = forward_motion;
-            const lateral_motion = pins.left_y_axis.read();
-            _ = lateral_motion;
+    var lvl: u16 = 0;
+    while (true) : (lvl = incWrap(lvl, 100)) {
+        // const forward_motion = pins.left_x_axis.read();
+        // _ = forward_motion;
+        // const lateral_motion = pins.left_y_axis.read();
+        // _ = lateral_motion;
 
-            pins.motor1.slice().set_wrap(100);
-            pins.motor1.slice().set_level(lvl);
+        pins.motor1.slice().set_wrap(100);
+        pins.motor1.set_level(lvl);
 
-            pins.motor2.slice().set_wrap(100);
-            pins.motor2.slice().set_level(lvl);
+        pins.motor2.slice().set_wrap(100);
+        pins.motor2.set_level(lvl);
 
-            pins.motor3.slice().set_wrap(100);
-            pins.motor3.slice().set_level(lvl);
+        pins.motor3.slice().set_wrap(100);
+        pins.motor3.set_level(lvl);
 
-            pins.motor4.slice().set_wrap(100);
-            pins.motor4.slice().set_level(lvl);
+        pins.motor4.slice().set_wrap(100);
+        pins.motor4.set_level(lvl);
 
-            if (pins.left_trigger.read()) {
-                pins.retract.write(false);
-                pins.fire.write(true);
-                time.sleep(100);
-                pins.fire.write(false);
-                pins.retract.write(true);
-            }
+        if (false) {
+            pins.retract.write(false);
+            pins.fire.write(true);
+            time.sleep(100);
+            pins.fire.write(false);
+            pins.retract.write(true);
         }
     }
 }
