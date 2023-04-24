@@ -108,15 +108,19 @@ pub fn main() !void {
 
         pins.motor1.slice().set_wrap(100);
         pins.motor1.set_level(lvl);
+        pins.motor1.slice().enable();
 
         pins.motor2.slice().set_wrap(100);
         pins.motor2.set_level(lvl);
+        pins.motor2.slice().enable();
 
         pins.motor3.slice().set_wrap(100);
         pins.motor3.set_level(lvl);
+        pins.motor3.slice().enable();
 
         pins.motor4.slice().set_wrap(100);
         pins.motor4.set_level(lvl);
+        pins.motor4.slice().enable();
 
         if (false) {
             pins.retract.write(false);
